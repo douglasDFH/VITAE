@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curriculum Vitae - Ingeniero en Sistemas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f5f5f5;
+        }
+        .sidebar {
+            width: 300px;
+            background-color: #006699;
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+        }
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: block;
+            background-color: #ffffff;
+        }
+        .section {
+            margin-bottom: 25px;
+        }
+        .section-title {
+            color: #006699;
+            border-bottom: 2px solid #006699;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+        .sidebar-title {
+            font-size: 1.2em;
+            border-bottom: 2px solid white;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        .skill-bar {
+            width: 100%;
+            background-color: #ffffff3d;
+            height: 8px;
+            margin: 5px 0 15px 0;
+            border-radius: 4px;
+        }
+        .skill-level {
+            height: 100%;
+            background-color: white;
+            border-radius: 4px;
+        }
+        .skill-name {
+            margin-bottom: 5px;
+        }
+        .contact-info {
+            margin-bottom: 5px;
+        }
+        .experience-item {
+            margin-bottom: 20px;
+        }
+        .date {
+            color: #006699;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <img class="profile-image" src="profile-placeholder.jpg" alt="Foto de perfil">
+        
+        <div class="sidebar-section">
+            <h2 class="sidebar-title">Datos Personales</h2>
+            <div class="contact-info">
+                <p>📧 douglasdfh88@gmail.com</p>
+                <p>📱 74940820</p>
+                <p>🏠 santa cruz , Bolivia</p>
+                <p>💼 Soltero | 25 años</p>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2 class="sidebar-title">Competencias</h2>
+            <div class="skill-name">Bases de Datos</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 95%"></div></div>
+            
+            <div class="skill-name">Desarrollo Backend</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+            
+            <div class="skill-name">Cloud Computing</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+        </div>
+
+        <div class="sidebar-section">
+            <h2 class="sidebar-title">Idiomas</h2>
+            <div class="skill-name">Español</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 100%"></div></div>
+            
+            <div class="skill-name">Inglés</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+            
+            <div class="skill-name">Portugués</div>
+            <div class="skill-bar"><div class="skill-level" style="width: 60%"></div></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="section">
+            <h1>Douglas Flor Hernandez</h1>
+            <h2>Ingeniero en Sistemas</h2>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Perfil Profesional</h2>
+            <p>Ingeniero en Sistemas especializado en bases de datos con experiencia en diseño, implementación y optimización de soluciones de datos empresariales. Apasionado por la tecnología y el análisis de datos.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Experiencia</h2>
+            <div class="experience-item">
+                <h3>Analista de Bases de Datos Senior</h3>
+                <p class="date">TechSolutions Inc. | 2023 - Presente</p>
+                <ul>
+                    <li>Diseño y optimización de bases de datos para aplicaciones empresariales</li>
+                    <li>Implementación de soluciones de alta disponibilidad</li>
+                    <li>Reducción del tiempo de respuesta de consultas en un 40%</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Desarrollador Backend Jr.</h3>
+                <p class="date">DataCorp Solutions | 2022 - 2023</p>
+                <ul>
+                    <li>Desarrollo de APIs RESTful con integración a múltiples bases de datos</li>
+                    <li>Implementación de microservicios con Docker y Kubernetes</li>
+                    <li>Optimización de procesos ETL para big data</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Formación</h2>
+            <div class="experience-item">
+                <h3>Ingeniería en Sistemas</h3>
+                <p class="date">Universidad Privada Domingo savio | 2019 - 2028</p>
+                <p>Promedio: 8.9/10</p>
+            </div>
+            <div class="experience-item">
+                <h3>Certificaciones</h3>
+                <ul>
+                    <li>Microsoft Certified: Azure Database Administrator Associate</li>
+                    <li>Oracle Database SQL Certified Professional</li>
+                    <li>MongoDB Certified DBA Associate</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
