@@ -5,20 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curriculum Vitae - Ingeniero en Sistemas</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 0;
-            display: flex;
+            padding: 20px;
             background-color: #f5f5f5;
         }
+
+        .cv-container {
+            max-width: 8.5in;
+            min-height: 11in;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+        }
         .sidebar {
-            width: 300px;
+            width: 35%;
+            min-width: 250px;
             background-color: #006699;
             color: white;
             padding: 20px;
-            min-height: 100vh;
         }
         .main-content {
             flex: 1;
@@ -76,10 +88,111 @@
             color: #006699;
             font-weight: bold;
         }
+
+        /* Media queries para responsividad */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .cv-container {
+                flex-direction: column;
+                max-width: 100%;
+                min-height: auto;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: auto;
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .sidebar {
+                padding: 10px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .section-title, .sidebar-title {
+                font-size: 1.1em;
+            }
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background-color: white;
+            }
+
+            .cv-container {
+                box-shadow: none;
+                max-width: none;
+                width: 100%;
+            }
+
+            .export-btn {
+                display: none !important;
+            }
+        }
+
+        .export-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #006699;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        .export-btn:hover {
+            background-color: #004d73;
+        }
+
+        .export-btn:active {
+            transform: translateY(1px);
+        }
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-    <div class="sidebar">
+    <button class="export-btn" onclick="exportToPDF()">📄 Exportar PDF</button>
+    <div class="cv-container">
+        <div class="sidebar">
         <img class="profile-image" src="profile-placeholder.jpg" alt="Foto de perfil">
         
         <div class="sidebar-section">
@@ -167,5 +280,62 @@
             </div>
         </div>
     </div>
+
+    <script>
+        async function exportToPDF() {
+            const button = document.querySelector('.export-btn');
+            const originalText = button.innerHTML;
+
+            // Cambiar texto del botón
+            button.innerHTML = '⏳ Generando PDF...';
+            button.disabled = true;
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const element = document.querySelector('.cv-container');
+
+                // Configurar html2canvas para mejor calidad
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    width: element.offsetWidth,
+                    height: element.offsetHeight
+                });
+
+                // Crear PDF en tamaño carta
+                const pdf = new jsPDF('p', 'mm', 'letter');
+                const imgData = canvas.toDataURL('image/png');
+
+                // Calcular dimensiones para ajustar al tamaño carta
+                const pdfWidth = 215.9; // Ancho carta en mm
+                const pdfHeight = 279.4; // Alto carta en mm
+                const imgWidth = pdfWidth - 20; // Margen de 10mm a cada lado
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                // Si la imagen es más alta que la página, ajustar
+                if (imgHeight > pdfHeight - 20) {
+                    const scaleFactor = (pdfHeight - 20) / imgHeight;
+                    const finalWidth = imgWidth * scaleFactor;
+                    const finalHeight = imgHeight * scaleFactor;
+                    pdf.addImage(imgData, 'PNG', (pdfWidth - finalWidth) / 2, 10, finalWidth, finalHeight);
+                } else {
+                    pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+                }
+
+                // Descargar el PDF
+                pdf.save('CV_Douglas_Flor_Hernandez.pdf');
+
+            } catch (error) {
+                console.error('Error al generar PDF:', error);
+                alert('Error al generar el PDF. Por favor, inténtalo de nuevo.');
+            } finally {
+                // Restaurar botón
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+    </script>
 </body>
 </html>
